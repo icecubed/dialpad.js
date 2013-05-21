@@ -2,12 +2,13 @@
 <html>
     <head>
         <title>Dialer Demo</title>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="dialpad.css">
-        <script src="vendor/att.phonenumber.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
         <script src="dialpad.js"></script>
         <script>
-            window.dialer = new Dialpad({
+            window.dialpad = new Dialpad({
                 onPress: function (key) {
                     console.log('a key was pressed', key);
                 },
@@ -19,15 +20,23 @@
                 },
                 onCall: function (number) {
                     console.log('The call button was pressed', number);
-                }
+                },
+                footer: false
             });
 
-            document.addEventListener('DOMContentLoaded', function () {
-              document.body.insertBefore(dialer.render(), document.body.firstChild);
+            document.addEventListener('DOMContentLoaded', function() {
+                $('pre').popover({
+                    html: true,
+                    placement: 'right',
+                    trigger: 'click',
+                    title: 'dialpad',
+                    content: dialpad.render()
+                });                
             }, false);
         </script>
     </head>
     <body>
+
         <div class="container offset4 span8">
             <h1>Dialer Demo</h1>
             <p>dialer.js renders a dialer</p>
